@@ -160,21 +160,21 @@ module Spaceship
         raise Tunes::Error.new, error_string
       end
 
-      response = request(:post) do |req|
-        req.url("ra/v1/session/webSession")
-        req.body = {
-          contentProviderId: team_id,
-          dsId: user_detail_data.ds_id # https://github.com/fastlane/fastlane/issues/6711
-        }.to_json
-        req.headers['Content-Type'] = 'application/json'
-      end
+#       response = request(:post) do |req|
+#         req.url("ra/v1/session/webSession")
+#         req.body = {
+#           contentProviderId: team_id,
+#           dsId: user_detail_data.ds_id # https://github.com/fastlane/fastlane/issues/6711
+#         }.to_json
+#         req.headers['Content-Type'] = 'application/json'
+#       end
 
-      handle_itc_response(response.body)
+#       handle_itc_response(response.body)
 
       # clear user_details_data cache, as session switch will have changed sessionToken attribute
       @_cached_user_details = nil
 
-      @current_team_id = team_id
+      @current_team_id = TEAM_ID
     end
 
     # @return (Hash) Fetches all information of the currently used team
